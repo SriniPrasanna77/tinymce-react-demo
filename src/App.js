@@ -6,16 +6,21 @@ export default function App() {
   const log = () => {
     if (editorRef.current) {
       console.log(editorRef.current.getContent());
-      console.log(editorRef.current.getBody());
-      editorRef.current.insertContent('Testing dynamic data insert');
     }
   };
+  const replace = () => {
+    if (editorRef.current) {
+      var editorContent = editorRef.current.getContent();
+      editorContent = editorContent.replace('{{userName}}','Srini Prabhakara');
+      editorRef.current.setContent(editorContent);
+    }
+  }
   return (
     <>
       <Editor
         tinymceScriptSrc={process.env.PUBLIC_URL + '/tinymce/tinymce.min.js'}
         onInit={(evt, editor) => editorRef.current = editor}
-        initialValue='<p>This is the initial content of the editor.</p>'
+        initialValue='<p>Testing dynamic data replacement {{userName}}.</p>'
         init={{
           smart_paste: false,
           height: 500,
@@ -33,6 +38,7 @@ export default function App() {
         }}
       />
       <button onClick={log}>Log editor content</button>
+      <button onClick={replace}>Replace User name with Srini Prabhakara</button>
     </>
   );
 }
