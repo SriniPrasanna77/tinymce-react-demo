@@ -6,7 +6,7 @@ export default function App() {
   const log = () => {
     if (editorRef.current) {
       console.log(editorRef.current.getContent());
-      console.log(editorRef);
+      console.log(editorRef.current.getText(0,10));
       editorRef.current.insertContent('Testing dynamic data insert');
     }
   };
